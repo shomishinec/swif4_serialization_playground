@@ -101,6 +101,11 @@ struct ServerResponse<T: Codable>: Codable {
     let error: ServerError?
 }
 
+
+//encode
 let serverResponse = ServerResponse(success: true, data: user, error: nil)
 let rawData = try! JSONEncoder().encode(serverResponse)
 let jsonString = String(data:rawData , encoding: .utf8)
+
+//decode
+let parsedResponse = try! JSONDecoder().decode(ServerResponse<User>.self, from: rawData)
